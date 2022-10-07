@@ -19,7 +19,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 import usbmux
-import socket
+# import socket
 import socketserver
 import select
 from optparse import OptionParser

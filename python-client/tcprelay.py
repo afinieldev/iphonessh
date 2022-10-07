@@ -20,7 +20,7 @@
 
 import usbmux
 import socket
-import SocketServer
+import socketserver
 import select
 from optparse import OptionParser
 import sys
@@ -67,7 +67,7 @@ class SocketRelay(object):
 				self.btoa += s
 			#print "Relay iter: %8d atob, %8d btoa, lists: %r %r %r"%(len(self.atob), len(self.btoa), rlo, wlo, xlo)
 
-class TCPRelay(SocketServer.BaseRequestHandler):
+class TCPRelay(socketserver.BaseRequestHandler):
 	def handle(self):
 		print("Incoming connection to %d"%self.server.server_address[1])
 		mux = usbmux.USBMux(options.sockpath)
@@ -91,10 +91,10 @@ class TCPRelay(SocketServer.BaseRequestHandler):
 			lsock.close()
 		print("Connection closed")
 
-class TCPServer(SocketServer.TCPServer):
+class TCPServer(socketserver.TCPServer):
 	allow_reuse_address = True
 
-class ThreadedTCPServer(SocketServer.ThreadingMixIn, TCPServer):
+class ThreadedTCPServer(socketserver.ThreadingMixIn, TCPServer):
 	pass
 
 HOST = "localhost"
